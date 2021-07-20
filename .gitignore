@@ -1,0 +1,4 @@
+bazel-*
+proxygen/
+bazel.gpg
+bazel.sh

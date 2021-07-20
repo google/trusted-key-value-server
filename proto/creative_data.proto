@@ -1,0 +1,38 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+
+package trusted_server;
+
+// Representation of an interest group creative to return to client
+// when the key is requested in a FLEDGE trusted server callout
+// (See
+// https://github.com/WICG/turtledove/blob/main/FLEDGE.md#31-fetching-real-time-data-from-a-trusted-server)
+// This proto will be converted into JSON in the response.
+message Creative {
+  optional string key = 1;
+
+  // Creative data is held in bytes and sent in the response,
+  // clients can deserialize this data based on the proto
+  // they've used to populate our spanner database.
+  optional bytes creative_data = 2 [json_name = "creativeData"];
+}
+
+// This is an example proto to hold creative metadata to
+// support on-device policy and publisher controls enforcement
+// in FLEDGE.
+message CreativeMetadata {
+  optional bool is_servible = 1 [json_name = "isServible"];
+}
